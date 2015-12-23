@@ -17,7 +17,7 @@ module Kaminari
         extend Kaminari::PageScopeMethods
       end
 
-      if @_total_count && (@_total_count <= original_array.count)
+      if @_total_count && (@_total_count <= original_array.count(:all))
         original_array = original_array.first(@_total_count)[@_offset_value, @_limit_value]
       end
 
@@ -46,7 +46,7 @@ module Kaminari
 
     # total item numbers of the original array
     def total_count
-      @_total_count || @_original_array.count
+      @_total_count || @_original_array.count(:all)
     end
 
     # returns another chunk of the original array
